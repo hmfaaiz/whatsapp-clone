@@ -1,10 +1,18 @@
 
-import Header from "./components/login/Header"
+import Whatsapp from "./components/Whatsapp"
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import Users  from './components/Authentication/Users'
+
 function App() {
+
+  const ClientId = process.env.REACT_APP_clientid
   return (
-    <>
-    <Header/>
-    </>
+    <GoogleOAuthProvider clientId={ClientId}>
+      <Users>
+        <Whatsapp />
+      </Users>
+    </GoogleOAuthProvider>
   );
 }
 

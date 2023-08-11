@@ -1,8 +1,13 @@
 import React from 'react'
-import { Dialog, Box, Typography, List, ListItem, styled} from "@mui/material"
+import { Dialog, Box, Typography, List, ListItem, styled } from "@mui/material"
 import { qrCodeImage } from "../resource/imgData"
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode"
+
+import { useContext } from "react";
+import { UserContext } from '../Authentication/Users'
+
+
 const Container = styled(Box)`
     display:flex;
     `;
@@ -47,22 +52,25 @@ const DialogueStyle = {
     maxWidth: '90%',
     maxHeight: '100%',
     marginTop: '17%',
-    boxShadow: 'none',
+    // boxShadow: 'none',
     overflow: 'hidden',
 }
 
 
 const Dialogue = () => {
+    const { setUserAccount } = useContext(UserContext)
     const onLoginSuccess = (res) => {
-        const data=jwt_decode(res.credential)
-        console.log("Success",data)
+        const data = jwt_decode(res.credential)
+        setUserAccount(data)
+        console.log("Success", data)
     }
     const onLoginError = (err) => {
-        console.log("Error",err)
+        console.log("Error", err)
     }
     return (
         <Dialog open={true}
-            PaperProps={{ style: DialogueStyle }}>
+            PaperProps={{ style: DialogueStyle }}
+            hideBackdrop={true}>
             <Container>
                 <BoxText>
                     <Title>Use WhatsApp on your computer</Title>
@@ -77,14 +85,14 @@ const Dialogue = () => {
                 <Box>
                     <QrcodeStyle src={qrCodeImage} alt='qrcode'></QrcodeStyle>
                     <Box>
-                    <GoogleLogin
-                        onSuccess={onLoginSuccess}
-                        onError={onLoginError}
-                    />
-                </Box>
+                        <GoogleLogin
+                            onSuccess={onLoginSuccess}
+                            onError={onLoginError}
+                        />
+                    </Box>
 
                 </Box>
-               
+
             </Container>
 
 

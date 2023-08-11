@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar, Toolbar, styled, Box } from "@mui/material"
 
-import Dialogue from "./Dialogue"
+import DialogChat from "./DialogChat"
 
 const BoxOverride = styled(Box)`
     background-color: #e9edef;
@@ -10,7 +10,7 @@ const BoxOverride = styled(Box)`
 `
 
 const AppBarOverride = styled(AppBar)`
-    height:222px;
+    height:112px;
     box-shadow:none;
     background-color:#00a884;
 `
@@ -23,7 +23,7 @@ const Header = () => {
                 <Toolbar>
                     Whatsapp
                 </Toolbar>
-                <Dialogue />
+                <DialogChat/>
             </AppBarOverride>
         </BoxOverride>
 
